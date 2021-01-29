@@ -5,6 +5,7 @@ Assuming we already have some historical data for the fuel quotes:
 3.       Test- After adjusting our model, we will test the remaining 40% historical data
             	The framework / gui of the software is built on [insert language here].
 Also, we will probably create separate modules for the login, registration, profile management, fuel quote form, pricing module, and the quote history.
+Based on the overview of the nature of client accounts, we will have to implement some sort of security to encrypt confidential information such as a password / personal information.
 
 
 2.
@@ -21,6 +22,9 @@ Code up the test program. The goal is to make the program run properly; not effi
 Run the code and attempt to remove any bugs / errors. We will also make any optimizations to run the code efficiently.
 5.       Deploy:
 Once the code is ironed out, we can then compile the whole program and use it as if we are the clients.
+
+If there is any reason for potential updates / improvements to the design, the methodology allows us to push for new features / debugging from the feedback recieved upon deploying the software.
+
 
 REFERENCES:
 https://www.edrawsoft.com/software-architecture-example.html
