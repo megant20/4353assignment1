@@ -4,11 +4,11 @@
             2.       Validate- We will approach validation with the loss function.
             3.       Test- After adjusting our model, we will test the remaining 40% historical data
                                     The framework / gui of the software is built on [insert language here].
-            Also, we will probably create separate modules for the login, registration, profile management, fuel quote form, pricing module, and the quote history.
+            Also, we will probably create separate modules for the login, registration, profile management, fuel quote form, pricing module, and the quote history at least and possibly separate those into even more modules if they prove to have multiple parts.
             Based on the overview of the nature of client accounts, we will have to implement some sort of security to encrypt confidential information such as a password / personal information.
 
 
-2.          The development methodology that we will use is the agile method with scrum framework. To keep the project organized, we want to make sure all procedures are checked and properly implemented. If an issue arises, we can quickly go back and find the stage where we need to address. Although slow, the rigid methodology ensures organization and reduces the chance of errors. The less issues, the less risk of compromising the whole design.
+2.          The development methodology that we will use is the agile method with scrum framework. To keep the project organized, we want to make sure all procedures are checked and properly implemented. If an issue arises, we can quickly go back and find the stage where we need to address. This methodology ensures productivity and reduces the risk, increases productivity, and is flexible.
             The following are the development stages that we will emulate / implement:
             1.       Plan:
             Brainstorm the containers and modules needed for each part of the software
@@ -16,10 +16,11 @@
             Start with the framework of pseudocode.
             3.       Test:
             Code up the test program. The goal is to make the program run properly; not efficiently.
-            4.       Debug:
+            5.       Debug:
             Run the code and attempt to remove any bugs / errors. We will also make any optimizations to run the code efficiently.
-            5.       Deploy:
+            6.       Deploy:
             Once the code is ironed out, we can then compile the whole program and use it as if we are the clients.
+            Maybe Plan and Design again in according to the outcome of testing/deploying and continue to do so in iterations, adjusting as needed so the project is flexible and productive.
 
             If there is any reason for potential updates / improvements to the design, the methodology allows us to push for new features / debugging from the feedback recieved upon deploying the software.
             
@@ -36,3 +37,4 @@ https://www.edrawsoft.com/software-architecture-example.html
 Methodology - Google search:
 https://bit.ly/2Yq6pco
 https://www.synopsys.com/blogs/software-security/top-4-software-development-methodologies/
+https://www.businessnewsdaily.com/4987-what-is-agile-scrum-methodology.html#:~:text=Agile%20scrum%20methodology%20is%20a,with%20a%20potentially%20deliverable%20product.&text=Agile%20scrum%20methodology%20has%20several%20benefits.
