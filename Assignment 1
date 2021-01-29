@@ -10,10 +10,12 @@
 
 2.          The development methodology that we will use is the agile method with scrum framework. To keep the project organized, we want to make sure all procedures are checked and properly implemented. If an issue arises, we can quickly go back and find the stage where we need to address. This methodology ensures productivity and reduces the risk, increases productivity, and is flexible.
             The following are the development stages that we will emulate / implement:
+            
+            
             1.       Plan:
             Brainstorm the containers and modules needed for each part of the software.
             2.       Design:
-            Start with the framework of pseudocode.
+            Start with the framework of pseudocode, only focusing on most important modules for now.
             3.       Test:
             Code up the test program. The goal is to make the program run properly; not efficiently. At this stage just make the most important components of the software.
             5.       Debug:
