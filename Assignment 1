@@ -1,1 +1,29 @@
+1.       My first thought on the design of the prediction is using machine learning. We will train on historical data with the following stages of machine learning:
+Assuming we already have some historical data for the fuel quotes:
+1.       Train- With about 60% of the historical data.
+2.       Validate- We will approach validation with the loss function.
+3.       Test- After adjusting our model, we will test the remaining 40% historical data
+            	The framework / gui of the software is built on [insert language here].
+Also, we will probably create separate modules for the login, registration, profile management, fuel quote form, pricing module, and the quote history.
 
+
+2.
+The development methodology that we will use is the waterfall method. To keep the project organized, we want to make sure all procedures are checked and properly implemented. If an issue arises, we can quickly go back and find the stage where we need to address. Although slow, the rigid methodology ensures organization and reduces the chance of errors. The less issues, the less risk of compromising the whole design.
+The following are the development stages that we will emulate / implement:
+1.       Plan:
+Brainstorm the containers and modules needed for each part of the software
+2.       Design:
+Start with the framework of pseudocode.
+3.       Test:
+Code up the test program. The goal is to make the program run properly; not efficiently.
+4.       Debug:
+Run the code and attempt to remove any bugs / errors. We will also make any optimizations to run the code efficiently.
+5.       Deploy:
+Once the code is ironed out, we can then compile the whole program and use it as if we are the clients.
+
+REFERENCES:
+https://www.edrawsoft.com/software-architecture-example.html
+
+Methodology - Google search:
+https://bit.ly/2Yq6pco
+https://www.synopsys.com/blogs/software-security/top-4-software-development-methodologies/
