@@ -8,6 +8,7 @@ Also, we will probably create separate modules for the login, registration, prof
 
 
 2.
+Agile
 The development methodology that we will use is the waterfall method. To keep the project organized, we want to make sure all procedures are checked and properly implemented. If an issue arises, we can quickly go back and find the stage where we need to address. Although slow, the rigid methodology ensures organization and reduces the chance of errors. The less issues, the less risk of compromising the whole design.
 The following are the development stages that we will emulate / implement:
 1.       Plan:
