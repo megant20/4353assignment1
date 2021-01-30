@@ -1,4 +1,4 @@
-1.          Our thoughts on the design of the prediction is using machine learning with linear regression. We will train on historical data with the following stages of machine learning:
+h1.          Our thoughts on the design of the prediction is using machine learning with linear regression. We will train on historical data with the following stages of machine learning:
             Assuming we already have some historical data for the fuel quotes:
             1.       Train- With about 60% of the historical data.
             2.       Validate- We will approach validation with the loss function.
@@ -19,7 +19,7 @@
             5.       Deploy: Once the code is ironed out, we can then compile the whole program and use it as if we are the clients.
             6.       If needed, replan and redesign based on the outcome of testing/deploying
             7.       Add some of the rest modules that are less important, and maybe add components/modules to the software design that proved to be necessary after deployment.
-            8.       Test, debug, deploy, and adjust the program as needed in iterations until it reaches a point where everything is complete and high in quality.
+            8.       Test, debug, deploy, and adjust the program as needed in iterations until everything is complete.
 
             If there is any reason for potential updates / improvements to the design, the methodology allows us to push for new features / debugging from the feedback recieved upon deploying the software.
             
