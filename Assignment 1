@@ -17,7 +17,9 @@
             3.       Test: Code up the test program. The goal is to make the program run properly; not efficiently. At this stage just make the most important components of the software.
             4.       Debug: Run the code and attempt to remove any bugs / errors. We will also make any optimizations to run the code efficiently.
             5.       Deploy: Once the code is ironed out, we can then compile the whole program and use it as if we are the clients.
-            6.       If needed, replan and redesign based on the outcome of testing/deploying; continue to do so in iterations while adjusting in order to make the project more flexible and productive.
+            6.       If needed, replan and redesign based on the outcome of testing/deploying
+            7.       Add some of the rest modules that are less important, and maybe add components to the software that proved to be necessary after the deployment.
+            8.       Test, debug, and deploy and adjust the program as needed in iterations until it reaches a point where everything is complete and high in quality.
 
             If there is any reason for potential updates / improvements to the design, the methodology allows us to push for new features / debugging from the feedback recieved upon deploying the software.
             
