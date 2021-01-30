@@ -18,8 +18,8 @@
             4.       Debug: Run the code and attempt to remove any bugs / errors. We will also make any optimizations to run the code efficiently.
             5.       Deploy: Once the code is ironed out, we can then compile the whole program and use it as if we are the clients.
             6.       If needed, replan and redesign based on the outcome of testing/deploying
-            7.       Add some of the rest modules that are less important, and maybe add components to the software that proved to be necessary after the deployment.
-            8.       Test, debug, and deploy and adjust the program as needed in iterations until it reaches a point where everything is complete and high in quality.
+            7.       Add some of the rest modules that are less important, and maybe add components/modules to the software design that proved to be necessary after deployment.
+            8.       Test, debug, deploy, and adjust the program as needed in iterations until it reaches a point where everything is complete and high in quality.
 
             If there is any reason for potential updates / improvements to the design, the methodology allows us to push for new features / debugging from the feedback recieved upon deploying the software.
             
