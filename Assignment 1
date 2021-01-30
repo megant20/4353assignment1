@@ -1,10 +1,10 @@
-1.          My first thought on the design of the prediction is using machine learning. We will train on historical data with the following stages of machine learning:
+1.          Our thoughts on the design of the prediction is using machine learning with linear regression. We will train on historical data with the following stages of machine learning:
             Assuming we already have some historical data for the fuel quotes:
             1.       Train- With about 60% of the historical data.
             2.       Validate- We will approach validation with the loss function.
             3.       Test- After adjusting our model, we will test the remaining 40% historical data
-                                    The framework / gui of the software is built on [insert language here].
-            Also, we will probably create separate modules for the login, registration, profile management, fuel quote form, pricing module, and the quote history at least and possibly separate those into even more modules if they prove to have multiple parts.
+
+            Also, we will create separate modules for the login, registration, profile management, fuel quote form, pricing module, and the quote history at least and possibly separate those into even more modules if they prove to have multiple parts.
             Based on the overview of the nature of client accounts, we will have to implement some sort of security to encrypt confidential information such as a password / personal information.
 
 
@@ -12,17 +12,12 @@
             The following are the development stages that we will emulate / implement:
             
             
-            1.       Plan:
-            Brainstorm the containers and modules needed for each part of the software.
-            2.       Design:
-            Start with the framework of pseudocode, only focusing on most important modules for now.
-            3.       Test:
-            Code up the test program. The goal is to make the program run properly; not efficiently. At this stage just make the most important components of the software.
-            5.       Debug:
-            Run the code and attempt to remove any bugs / errors. We will also make any optimizations to run the code efficiently.
-            6.       Deploy:
-            Once the code is ironed out, we can then compile the whole program and use it as if we are the clients.
-            7. Maybe Plan and Design again in according to the outcome of testing/deploying and continue to do so in iterations, adjusting as needed so the project is flexible and productive.
+            1.       Plan: Brainstorm the containers and modules needed for each part of the software.
+            2.       Design: Start with the framework of pseudocode, only focusing on most important modules for now.
+            3.       Test: Code up the test program. The goal is to make the program run properly; not efficiently. At this stage just make the most important components of the software.
+            4.       Debug: Run the code and attempt to remove any bugs / errors. We will also make any optimizations to run the code efficiently.
+            5.       Deploy: Once the code is ironed out, we can then compile the whole program and use it as if we are the clients.
+            6.       If needed, replan and redesign based on the outcome of testing/deploying; continue to do so in iterations while adjusting in order to make the project more flexible and productive.
 
             If there is any reason for potential updates / improvements to the design, the methodology allows us to push for new features / debugging from the feedback recieved upon deploying the software.
             
@@ -30,7 +25,9 @@
 3.          See diagram file.
 
 
-4.          
+4.          Meghan and Alex drafted the documents to answer questions 1 and 2
+            David assembled the UML diagrams via Visio.
+            All parties agreed on their roles and completed theirs tasks.
 
 
 REFERENCES:
