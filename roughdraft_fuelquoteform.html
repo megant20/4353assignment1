@@ -1,24 +1,40 @@
-<form action = "#" method = "post">
-  <!-- Gallons Requested (numeric, required) -->
-  <label for = "gallons">Gallons Requested:</label><br>
-  <input type = "number" id="gallons" name="gallons" required><br>
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<style>
+		input, select, button {
+			margin:5px;
+		}
+		h1 {
+			font-family: roboto;
+		}
+	</style>
+	<title>Fuel Quote Form</title>
+	</head>
+	<body>
+		<h1>Fuel Quote Form</h1>
+    <form action = "#" method = "post">
+      <!-- Gallons Requested (numeric, required) -->
+      <label for = "gallons">Gallons Requested:</label><br>
+      <input type = "number" id="gallons" name="gallons" required><br>
 
-	<!-- Delivery Address (Non-editable, comes from client profile) -->
-  <label for = "address">Delivery Address:</label><br>
-  <input type = "text" id="address" name="address" value="placeholder" readonly><br>
+      <!-- Delivery Address (Non-editable, comes from client profile) -->
+      <label for = "address">Delivery Address:</label><br>
+      <input type = "text" id="address" name="address" value="placeholder1" readonly><br>
 
-	<!-- Delivery Date (Calender, date picker) -->
-  <label for = "d_date">Delivery Date:</label><br>
-  <input type = "date" id="d_date" name="d_date"><br>
+      <!-- Delivery Date (Calender, date picker) -->
+      <label for = "d_date">Delivery Date:</label><br>
+      <input type = "date" id="d_date" name="d_date"><br>
 
-	<!-- Suggested Price / gallon (numeric non-editable, price will be calculated by Pricing Module - we are not building pricing module yet) -->
-  <label for = "s_price">Suggested Price per Gallon:</label><br>
-  <input type = "text" id="s_price" name="s_price" value="placeholder" readonly><br>
+      <!-- Suggested Price / gallon (numeric non-editable, price will be calculated by Pricing Module - we are not building pricing module yet) -->
+      <label for = "s_price">Suggested Price per Gallon:</label><br>
+      <input type = "text" id="s_price" name="s_price" value="placeholder2" readonly><br>
 
-  <!-- Total Amount Due (numeric non-editable, calculated (gallons * price)) -->
-  <label for = "total_due">Total Amount Due:</label><br>
-  <input type = "text" id="total_due" name="total_due" value="placeholder" readonly><br>
+      <!-- Total Amount Due (numeric non-editable, calculated (gallons * price)) -->
+      <label for = "total_due">Total Amount Due:</label><br>
+      <input type = "text" id="total_due" name="total_due" value="placeholder3" readonly><br>
 
-  <button type = "submit" name = "fuel-form-submit">Submit</button>
+      <button type = "submit" name = "fuel-form-submit">Submit</button>
 
-</form>
+    </form>
+</html>
