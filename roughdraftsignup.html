@@ -4,11 +4,13 @@
   <br />
   <input type = "text" name = "mail" placeholder = "email" required maxlength = "30">
   <br />
-  <input type = "password" name = "pwd" placeholder = "password" required maxlength = "30">
+  <input type = "password" name = "pwd" placeholder = "password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters." required maxlength = "30">
+  <!--credit to https://www.w3schools.com/ for pattern-->
   <br />
-  <input type = "password" name = "pwd-repeat" placeholder = "repeat password" required maxlength = "30">
+  <input type = "password" name = "pwd-repeat" placeholder = "repeat password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters." required maxlength = "30">
   <br />
   <button type = "submit" name = "signup-submit" required>Sign up </button>
+  <p>Passwords must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.</p>
 
 </form>
 
