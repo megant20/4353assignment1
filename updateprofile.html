@@ -1,91 +1,111 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-	<style>
-		input, select, button {
-			margin:5px;
-		}
-		h1 {
-			font-family: roboto;
-		}
-	</style>
-	<title>Update Profile</title>
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto"> <!--be sure to include to ensure everyone has this font-->
+		<title>Update Profile</title>
+		<!--This <div> is the ribbon. Insert it into the <head> as done here. The ribbon class is defined in the stylesheet-->
+		<div class="ribbon">
+			<a href="fuelquoteform.html"><span>Get a Quote</span></a>
+			<a href="purchasehistory.html"><span>Purchase History</span></a>
+			<a href="updateprofile.html"><span>Profile</span></a>
+			<a href="logout.html"><span>Log Out</span></a>
+		</div>
 	</head>
 	<body>
 		<h1>Update Profile</h1>
+		<!--Basically, the table is a child of the <form>. It's a two column table; first column is the label; second column is the input field. 
+			The rowHeader and rowContents classes are defined in the stylesheet. Then your submit button(s) go at the end of (but not within) the table.-->
 		<form action="#" method="post" id="form-update-profile" onsubmit="submitClick()">
-			<input type="text" id="_full-name" name="full-name" placeholder="Full name" maxlength="50" required>
-			<br>
-			<input type="text" id="_address-line-1" name="address-line-1" placeholder="address line 1" maxlength="100" required>
-			<br>
-			<input type="text" id="_address-line-2" name="address-line-2" placeholder="address line 2" maxlength="100">
-			<br>
-			<input type="text" id="_city" name="city" placeholder="city" maxlength="100" required>
-			<br>	
-			<select name="state" id="select-state" required>
-				<option value="Alabama">Alabama</option>
-				<option value="Alaska">Alaska</option>
-				<option value="Arizona">Arizona</option>
-				<option value="Arkansas">Arkansas</option>
-				<option value="California">California</option>
-				<option value="Colorado">Colorado</option>
-				<option value="Connecticut">Connecticut</option>
-				<option value="Delaware">Delaware</option>
-				<option value="District of Columbia">District of Columbia</option>
-				<option value="Florida">Florida</option>
-				<option value="Georgia">Georgia</option>
-				<option value="Guam">Guam</option>
-				<option value="Hawaii">Hawaii</option>
-				<option value="Idaho">Idaho</option>
-				<option value="Illinois">Illinois</option>
-				<option value="Indiana">Indiana</option>
-				<option value="Iowa">Iowa</option>
-				<option value="Kanas">Kanas</option>
-				<option value="Kentucky">Kentucky</option>
-				<option value="Louisiana">Louisiana</option>
-				<option value="Maine">Maine</option>
-				<option value="Maryland">Maryland</option>
-				<option value="Massachusetts">Massachusetts</option>
-				<option value="Michigan">Michigan</option>
-				<option value="Minnesota">Minnesota</option>
-				<option value="Mississippi">Mississippi</option>
-				<option value="Missouri">Missouri</option>
-				<option value="Montana">Montana</option>
-				<option value="Nebraska">Nebraska</option>
-				<option value="Nevada">Nevada</option>
-				<option value="New Hampshire">New Hampshire</option>
-				<option value="New Jersey">New Jersey</option>
-				<option value="New Mexico">New Mexico</option>
-				<option value="New York">New York</option>
-				<option value="North Carolina">North Carolina</option>
-				<option value="North Dakota">North Dakota</option>
-				<option value="Ohio">Ohio</option>
-				<option value="Oklahoma">Oklahoma</option>
-				<option value="Oregon">Oregon</option>
-				<option value="Pennsylvania">Pennsylvania</option>
-				<option value="Puerto Rico">Puerto Rico</option>
-				<option value="Rhode Island">Rhode Island</option>
-				<option value="South Carolina">South Carolina</option>
-				<option value="South Dakota">South Dakota</option>
-				<option value="Tennessee">Tennessee</option>
-				<option value="Texas">Texas</option>
-				<option value="U.S. Virgin Islands">U.S. Virgin Islands</option>
-				<option value="Utah">Utah</option>
-				<option value="Vermont">Vermont</option>
-				<option value="Virginia">Virginia</option>
-				<option value="Washington">Washington</option>
-				<option value="West Virginia">West Virginia</option>
-				<option value="Wisconsin">Wisconsin</option>
-				<option value="Wyoming">Wyoming</option>
-			</select>
-			<br>
-			<input type="number" id="_zip-main" name="zip-main" placeholder="zip code" maxlength="5" required>
-			<label>-</label>
-			<input type="number" id="_zip-plus-four" name="zip-plus-four" placeholder="zip code extension" maxlength="4">
-			<br>
-			<button type="submit" name="profile-update">Update</button>
-			<button type="reset" name="profile-update-cancel">Cancel</button>
-			<br>
+			<table>
+				<tr>
+					<td class="rowHeader">Full Name:</td>
+					<td class="rowContents"><input type="text" id="full-name" name="full-name" maxlength="50" required></td>
+				</tr>
+				<tr>
+					<td class="rowHeader">Address Line 1:</td>
+					<td class="rowContents"><input type="text" id="address-line-1" name="address-line-1" maxlength="100" required></td>
+				</tr>
+				<tr>
+					<td class="rowHeader">Address Line 2:</td>
+					<td class="rowContents"><input type="text" id="address-line-2" name="address-line-2" maxlength="100"></td>
+				</tr>
+				<tr>
+					<td class="rowHeader">City:</td>
+					<td class="rowContents"><input type="text" id="city" name="city" maxlength="100" required></td>
+				</tr>
+				<tr>
+					<td class="rowHeader">State:</td>
+					<td class="rowContents">
+						<select name="state" id="select-state" required Value="Alabama">
+							<option value="Alabama">Alabama</option>
+							<option value="Alaska">Alaska</option>
+							<option value="Arizona">Arizona</option>
+							<option value="Arkansas">Arkansas</option>
+							<option value="California">California</option>
+							<option value="Colorado">Colorado</option>
+							<option value="Connecticut">Connecticut</option>
+							<option value="Delaware">Delaware</option>
+							<option value="District of Columbia">District of Columbia</option>
+							<option value="Florida">Florida</option>
+							<option value="Georgia">Georgia</option>
+							<option value="Guam">Guam</option>
+							<option value="Hawaii">Hawaii</option>
+							<option value="Idaho">Idaho</option>
+							<option value="Illinois">Illinois</option>
+							<option value="Indiana">Indiana</option>
+							<option value="Iowa">Iowa</option>
+							<option value="Kanas">Kanas</option>
+							<option value="Kentucky">Kentucky</option>
+							<option value="Louisiana">Louisiana</option>
+							<option value="Maine">Maine</option>
+							<option value="Maryland">Maryland</option>
+							<option value="Massachusetts">Massachusetts</option>
+							<option value="Michigan">Michigan</option>
+							<option value="Minnesota">Minnesota</option>
+							<option value="Mississippi">Mississippi</option>
+							<option value="Missouri">Missouri</option>
+							<option value="Montana">Montana</option>
+							<option value="Nebraska">Nebraska</option>
+							<option value="Nevada">Nevada</option>
+							<option value="New Hampshire">New Hampshire</option>
+							<option value="New Jersey">New Jersey</option>
+							<option value="New Mexico">New Mexico</option>
+							<option value="New York">New York</option>
+							<option value="North Carolina">North Carolina</option>
+							<option value="North Dakota">North Dakota</option>
+							<option value="Ohio">Ohio</option>
+							<option value="Oklahoma">Oklahoma</option>
+							<option value="Oregon">Oregon</option>
+							<option value="Pennsylvania">Pennsylvania</option>
+							<option value="Puerto Rico">Puerto Rico</option>
+							<option value="Rhode Island">Rhode Island</option>
+							<option value="South Carolina">South Carolina</option>
+							<option value="South Dakota">South Dakota</option>
+							<option value="Tennessee">Tennessee</option>
+							<option value="Texas">Texas</option>
+							<option value="U.S. Virgin Islands">U.S. Virgin Islands</option>
+							<option value="Utah">Utah</option>
+							<option value="Vermont">Vermont</option>
+							<option value="Virginia">Virginia</option>
+							<option value="Washington">Washington</option>
+							<option value="West Virginia">West Virginia</option>
+							<option value="Wisconsin">Wisconsin</option>
+							<option value="Wyoming">Wyoming</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="rowHeader">Zip Code:</td>
+					<td class="rowContents">
+						<input type="number" id="_zip-main" name="zip-main" maxlength="5" required>
+						<label>-</label>
+						<input type="number" id="_zip-plus-four" name="zip-plus-four" maxlength="4">
+					</td>
+				</tr>
+			</table>
+			<button type="submit" name="update">Update</button>
+			<button type="reset" name="cancel">Cancel</button>
 		</form>
 	</body>
 	<script>
