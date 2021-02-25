@@ -18,6 +18,7 @@ form {
 
 input {
 	margin: 5px;
+	padding-left: 2px;
 }
 
 h1 {
@@ -40,6 +41,10 @@ th {
 	padding-right: 5px;
 }
 
+button {
+	padding: 2px;
+}
+
 tr:nth-child(even) {
 	background-color: white;
 }
@@ -48,6 +53,11 @@ tr:nth-child(odd) {
 	background-color: #BEBEBE;
 }
 
+.explainText {
+	color: red;
+	font-size: 0.75em;
+	margin-bottom: 5px;
+}
 .rowHeader {
 	background-color: #C8102E;
 	color: white;
