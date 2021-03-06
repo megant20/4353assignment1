@@ -1,0 +1,12 @@
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL,
+  `address` varchar(32) NOT NULL,
+  `city` varchar(32) NOT NULL,
+  `state` varchar(32) NOT NULL,
+  `email` varchar(32) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `zipcode` varchar(32) NOT NULL,
+  `username` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) AUTO_INCREMENT = 1;
