@@ -43,12 +43,32 @@
 				<td class="rowContents"><input type = "text" id="total_due" name="total_due" readonly></td>
 			</tr>
 		</table>
-      <button type = "submit" name = "fuel-form-submit">Submit</button>
+      <button type = "submit" onclick="storeForm()" name = "fuel-form-submit">Submit</button>
 
     </form>
 	</body>
-	<script>
-	
+	<script type = "text/javascript">
+	var xmlhttp = new XMLHttpRequest();
+	var url = "getClientInfoDatabase";
+
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			var eventArr = JSON.parse(xmlhttp.responseText);
+			updateEvents(eventArr);
+		}
+	}
+
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
+
+	// Save information to database
+	function storeForm(){
+		var gallons = document.getElementById("gallons").value;
+		var deliveryAddress = document.getElementById("address").value;
+		var deliveryDate = document.getElementById("d_date").value;
+		var suggestedPrice = document.getElementById("s_price").value;
+		var totalDue = document.getElementById("total_due").value;
+	}
 
 	</script>
 </html>

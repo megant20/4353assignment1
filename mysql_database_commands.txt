@@ -1,0 +1,18 @@
+CREATE DATABASE group28;
+USE group28;
+
+CREATE TABLE userCredentials(
+    -> username VARCHAR(100),
+    -> password VARCHAR(15000));
+
+CREATE TABLE clientInformation(
+    -> username VARCHAR(100),
+    -> address VARCHAR(255),
+    -> state VARCHAR(2));
+
+CREATE TABLE fuelQuote(
+    -> gallons INT(11),
+    -> address VARCHAR(255),
+    -> delivery DATE,
+    -> price FLOAT(11),
+    -> totaldue FLOAT(21));

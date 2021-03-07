@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbconfig>
+  <connectionLimit>100</connectionLimit>
+  <host>localhost</host>
+  <user>root</user>
+  <password>password</password>
+  <database>group28</database>
+  <port>3308</port>
+</dbconfig>

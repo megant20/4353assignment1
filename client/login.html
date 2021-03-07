@@ -1,0 +1,19 @@
+<head>
+	<link rel = "stylesheet" type = "text/css" href = "/client/styles.css" />
+</head>
+<body>
+	<h1>Log in</h1>
+	<form action = "/sendLoginDetails" method = "post">
+		<table>
+			<tr>
+				<td class="rowHeader"><label for="emailuid">Username/E-mail:</label></td>
+				<td class="rowContents"><input type = "text" name = "emailuid" required></td>
+			</tr>
+			<tr>
+				<td class="rowHeader"><label for="pwd">Password:</label></td>
+				<td class="rowContents"><input type = "password" name = "pwd" required></td>
+			</tr>
+		</table>
+		<button type = "submit" name = "login-submit" required>Log In</button>
+	</form>
+</body>
