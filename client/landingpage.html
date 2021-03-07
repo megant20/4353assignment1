@@ -1,6 +1,17 @@
 
 <head>
-	<link rel = "stylesheet" type = "text/css" href = "styles.css" /> <!--be sure to include to ensure everyone has this font-->
+	<link rel = "stylesheet" type = "text/css" href = "styles.css" /> 
+	<script>
+    	function validatefunction() {
+		var form1 = document.getElementById("form1")
+      		if (form1.pwd.value != form1.pwdrepeat.value) {
+				form1.action = "landingpage.html"
+        				return false
+      		}
+			return true
+
+    }
+  </script>
 </head>
 <body>
   <div style = "width: 20%; height: 20%; margin: auto;">
