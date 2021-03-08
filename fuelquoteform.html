@@ -2,7 +2,6 @@
 <html>
 	<head>
 		<link rel = "stylesheet" typer = "text/css" href = "styles.css"/>
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto"> <!--be sure to include to ensure everyone has this font-->
 		<div class="ribbon">
 			<a href="fuelquoteform.html"><span>Get a Quote</span></a>
 			<a href="fuelquotehistory.html"><span>Fuel Quote History</span></a>
@@ -19,19 +18,19 @@
 				<td class="rowHeader"><label for = "gallons">Gallons Requested:</label></td>
 				<td class="rowContents"><input type = "number" id="gallons" name="gallons" required></td>
 			</tr>
-			
+
 			<!-- Delivery Address (Non-editable, comes from client profile) -->
 			<tr>
 				<td class="rowHeader"><label for = "address">Delivery Address:</label></td>
 				<td class="rowContents"><input type = "text" id="address" name="address" readonly></td>
 			</tr>
-			
+
 			<!-- Delivery Date (Calender, date picker) -->
 			<tr>
 				<td class="rowHeader"><label for = "d_date">Delivery Date:</label></td>
 				<td class="rowContents"><input type = "date" id="d_date" name="d_date"></td>
 			</tr>
-			
+
 			<!-- Suggested Price / gallon (numeric non-editable, price will be calculated by Pricing Module - we are not building pricing module yet) -->
 			<tr>
 				<td class="rowHeader"><label for = "s_price">Suggested Price per Gallon:</label></td>
@@ -44,7 +43,32 @@
 				<td class="rowContents"><input type = "text" id="total_due" name="total_due" readonly></td>
 			</tr>
 		</table>
-      <button type = "submit" name = "fuel-form-submit">Submit</button>
+      <button type = "submit" onclick="storeForm()" name = "fuel-form-submit">Submit</button>
 
     </form>
+	</body>
+	<script type = "text/javascript">
+	var xmlhttp = new XMLHttpRequest();
+	var url = "getClientInfoDatabase";
+
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			var eventArr = JSON.parse(xmlhttp.responseText);
+			updateEvents(eventArr);
+		}
+	}
+
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
+
+	// Save information to database
+	function storeForm(){
+		var gallons = document.getElementById("gallons").value;
+		var deliveryAddress = document.getElementById("address").value;
+		var deliveryDate = document.getElementById("d_date").value;
+		var suggestedPrice = document.getElementById("s_price").value;
+		var totalDue = document.getElementById("total_due").value;
+	}
+
+	</script>
 </html>

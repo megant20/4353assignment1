@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/client/styles.css">
+		<title>Update Profile</title>
+		<!--This <div> is the ribbon. Insert it into the <head> as done here. The ribbon class is defined in the stylesheet-->
+		<div class="ribbon">
+			<a href="/fuelquoteform"><span>Get a Quote</span></a>
+			<a href="/fuelquotehistory"><span>Fuel Quote History</span></a>
+			<a href="/updateprofile"><span>Profile</span></a>
+			<a href="/logout"><span>Log Out</span></a>
+		</div>
+	</head>
+	<body>
+		<h1>Update Profile</h1>
+		<!--Basically, the table is a child of the <form>. It's a two column table; first column is the label; second column is the input field.
+			The rowHeader and rowContents classes are defined in the stylesheet. Then your submit button(s) go at the end of (but not within) the table.-->
+		<form action="fuelquoteform.html" method="post" id="form-update-profile" onsubmit="submitClick()">
+			<table>
+				<tr>
+					<td class="rowHeader">Full Name:</td>
+					<td class="rowContents"><input type="text" id="full-name" name="full-name" maxlength="50" required></td>
+				</tr>
+				<tr>
+					<td class="rowHeader">Address Line 1:</td>
+					<td class="rowContents"><input type="text" id="address-line-1" name="address-line-1" maxlength="100" required></td>
+				</tr>
+				<tr>
+					<td class="rowHeader">Address Line 2:</td>
+					<td class="rowContents"><input type="text" id="address-line-2" name="address-line-2" maxlength="100"></td>
+				</tr>
+				<tr>
+					<td class="rowHeader">City:</td>
+					<td class="rowContents"><input type="text" id="city" name="city" maxlength="100" required></td>
+				</tr>
+				<tr>
+					<td class="rowHeader">State:</td>
+					<td class="rowContents">
+						<select name="state" id="select-state" required Value="Alabama">
+							<option value="Alabama">Alabama</option>
+							<option value="Alaska">Alaska</option>
+							<option value="Arizona">Arizona</option>
+							<option value="Arkansas">Arkansas</option>
+							<option value="California">California</option>
+							<option value="Colorado">Colorado</option>
+							<option value="Connecticut">Connecticut</option>
+							<option value="Delaware">Delaware</option>
+							<option value="District of Columbia">District of Columbia</option>
+							<option value="Florida">Florida</option>
+							<option value="Georgia">Georgia</option>
+							<option value="Guam">Guam</option>
+							<option value="Hawaii">Hawaii</option>
+							<option value="Idaho">Idaho</option>
+							<option value="Illinois">Illinois</option>
+							<option value="Indiana">Indiana</option>
+							<option value="Iowa">Iowa</option>
+							<option value="Kanas">Kanas</option>
+							<option value="Kentucky">Kentucky</option>
+							<option value="Louisiana">Louisiana</option>
+							<option value="Maine">Maine</option>
+							<option value="Maryland">Maryland</option>
+							<option value="Massachusetts">Massachusetts</option>
+							<option value="Michigan">Michigan</option>
+							<option value="Minnesota">Minnesota</option>
+							<option value="Mississippi">Mississippi</option>
+							<option value="Missouri">Missouri</option>
+							<option value="Montana">Montana</option>
+							<option value="Nebraska">Nebraska</option>
+							<option value="Nevada">Nevada</option>
+							<option value="New Hampshire">New Hampshire</option>
+							<option value="New Jersey">New Jersey</option>
+							<option value="New Mexico">New Mexico</option>
+							<option value="New York">New York</option>
+							<option value="North Carolina">North Carolina</option>
+							<option value="North Dakota">North Dakota</option>
+							<option value="Ohio">Ohio</option>
+							<option value="Oklahoma">Oklahoma</option>
+							<option value="Oregon">Oregon</option>
+							<option value="Pennsylvania">Pennsylvania</option>
+							<option value="Puerto Rico">Puerto Rico</option>
+							<option value="Rhode Island">Rhode Island</option>
+							<option value="South Carolina">South Carolina</option>
+							<option value="South Dakota">South Dakota</option>
+							<option value="Tennessee">Tennessee</option>
+							<option value="Texas">Texas</option>
+							<option value="U.S. Virgin Islands">U.S. Virgin Islands</option>
+							<option value="Utah">Utah</option>
+							<option value="Vermont">Vermont</option>
+							<option value="Virginia">Virginia</option>
+							<option value="Washington">Washington</option>
+							<option value="West Virginia">West Virginia</option>
+							<option value="Wisconsin">Wisconsin</option>
+							<option value="Wyoming">Wyoming</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="rowHeader">Zip Code:</td>
+					<td class="rowContents">
+						<input type="number" id="_zip-main" name="zip-main" maxlength="5" required>
+						<label>-</label>
+						<input type="number" id="_zip-plus-four" name="zip-plus-four" maxlength="4">
+					</td>
+				</tr>
+			</table>
+			<button type="submit" name="update">Update</button>
+			<button type="reset" name="cancel">Cancel</button>
+		</form>
+	</body>
+	<script>
+		function updateProfile(username, fullName, addressLine1, addressLine2, city, state, zipCode)
+		{
+			//	placeholder for script function to make call to back end app to update profile info
+
+			// <debugging section>
+			/*var message = "Username: " + username;
+				message = message + "\nFull Name: " + fullName;
+				message = message + "\nAddress Line 1: " + addressLine1;
+				if (addressLine2 != "")
+					message = message + "\nAddress Line 2: " + addressLine2;
+				message = message + "\nCity: " + city;
+				message = message + "\nState: " + state;
+				message = message + "\nZip Code: " + zipCode;
+
+			window.alert(message);*/
+			// </debugging section>
+		}
+		function submitClick()
+		{
+			var formResponses = document.getElementById("form-update-profile").elements;
+
+			var username = "abc123"; // this would need to come from some token
+			var fullName = formResponses.namedItem("full-name").value;
+			var addressLine1 = formResponses.namedItem("address-line-1").value;
+			var addressLine2 = formResponses.namedItem("address-line-2").value;
+			var city = formResponses.namedItem("city").value;
+			var state = formResponses.namedItem("state").value;
+			var zipCode = formResponses.namedItem("zip-main").value;
+			if (formResponses.namedItem("zip-plus-four").value != "")
+				zipCode = zipCode + '-' + formResponses.namedItem("zip-plus-four").value;
+
+			updateProfile(username, fullName, addressLine1, addressLine2, city, state, zipCode);
+		}
+	</script>
+</html>
