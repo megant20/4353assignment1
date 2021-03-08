@@ -82,6 +82,43 @@ app.get('/getClientInfoDatabase',function(req, res) {
 // GET method route for the addEvent page.
 // It serves addEvent.html present in client folder
 app.get('/completeprofile',function(req, res) {
+	/* edit with completeprofile variables
+	var userName = req.body.uid;
+    var userPass =  crypto.createHash('sha256').update(req.body.pwd).digest('base64');
+    if (userName && userPass) {
+      con.query('SELECT * FROM userCredentials WHERE username = ?', [userName], function(error, results, fields) {
+        //User Doesn't Exist
+        if (!results.length){
+          console.log("Hello World");
+          var rowToBeInserted = {
+            username: userName,
+            password: userPass
+          };
+        con.query('INSERT userCredentials SET ?', rowToBeInserted, function(err, result) {
+          if(err) {
+          throw err;
+          }
+          console.log("Value inserted");
+          req.session.loggedin = true;
+          req.session.username = userName;
+          req.session.login = userName;
+          res.redirect('/completeprofile');
+        });
+      } else{
+        console.log("user EXISTS!");
+      }
+		});
+    } else {
+      console.log("Invalid UserData: one or more entries are missing!")
+    }
+	*/
+	
+	
+	
+	
+	
+	
+	
   if (req.session.loggedin) {
     res.sendFile(__dirname + '/client/completeprofile.html');
   } else {
