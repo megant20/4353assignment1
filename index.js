@@ -152,10 +152,56 @@ app.post('/addUser', function(req, res) {
         });
       } else{
         console.log("user EXISTS!");
+        res.send('user already exists!');
       }
 		});
     } else {
-      console.log("Invalid UserData: one or more entries are missing!")
+      console.log("Invalid UserData: one or more entries are missing!");
+      res.send("Invalid UserData: one or more entries are missing!")
+    }
+});
+
+app.post('/newProfile', function(req, res) {
+    var fullName = req.body.fullname;
+    var addy1 = req.body.addressline1;
+    var addy2 = req.body.addressline2;
+    var ncity = req.body.city;
+    var state = req.body.state;
+    var zipmain = req.body.zipmain;
+    var zipfour = req.body.zipplusfour;
+
+    var username = 	req.session.username;
+    if (username) {
+      con.query('SELECT * FROM userCredentials WHERE username = ?', [username], function(error, results, fields) {
+        //User Doesn't Exist
+        if (results.length){
+          console.log("Saving Info");
+          var rowToBeInserted = {
+            username: username,
+            addressLine1: addy1,
+            addressLine2: addy2,
+            city: ncity,
+            state: state,
+            zipMain: zipmain,
+            zipPlus4: zipfour
+          };
+        con.query('INSERT clientInformation SET ?', rowToBeInserted, function(err, result) {
+          if(err) {
+          throw err;
+          }
+          console.log("Value inserted");
+          // req.session.loggedin = true;
+          // req.session.username = userName;
+          // req.session.login = userName;
+          res.redirect('/completeprofile');
+        });
+      } else{
+        console.log("ERROR!");
+      }
+		});
+    } else {
+      console.log("Invalid UserData: one or more entries are missing!");
+      res.send("Invalid UserData: one or more entries are missing!")
     }
 });
 

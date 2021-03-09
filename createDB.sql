@@ -4,7 +4,6 @@ USE group28;
 CREATE TABLE IF NOT EXISTS `group28`.`clientInformation` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`username` VARCHAR(45) NOT NULL,
-	`password` VARCHAR(45) NOT NULL,
 	`addressLine1` VARCHAR(100) NOT NULL,
 	`addressLine2` VARCHAR(100) NULL,
 	`city` VARCHAR(100) NOT NULL,
@@ -14,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `group28`.`clientInformation` (
 	PRIMARY KEY(`id`),
 	UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE)
 	ENGINE = InnoDB;
-	
+
 CREATE TABLE IF NOT EXISTS `group28`.`userCredentials`(
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`username` VARCHAR(45) NOT NULL,
@@ -22,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `group28`.`userCredentials`(
 	PRIMARY KEY(`id`),
 	UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE)
 	ENGINE = InnoDB;
-	
+
 CREATE TABLE IF NOT EXISTS `group28`.`fuelQuote`(
 	`id` INT NOT NULL,
 	`gallonsRequested` INT(11) NULL,
