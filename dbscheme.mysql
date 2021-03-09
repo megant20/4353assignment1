@@ -1,12 +1,24 @@
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(32) NOT NULL,
-  `address` varchar(32) NOT NULL,
-  `city` varchar(32) NOT NULL,
-  `state` varchar(32) NOT NULL,
-  `email` varchar(32) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  `zipcode` varchar(32) NOT NULL,
-  `username` varchar(32) NOT NULL,
-  PRIMARY KEY (`id`)
-) AUTO_INCREMENT = 1;
+CREATE TABLE IF NOT EXISTS `group28`.`clientInformation`(
+`id` INT NOT NULL AUTO_INCREMENT,
+`username` VARCHAR(45) NOT NULL,
+`password` VARCHAR(45) NULL,
+`addressLine1` VARCHAR(100) NOT NULL,
+`addressLine2` VARCHAR(100) NULL,
+`city` VARCHAR(100) NOT NULL,
+`state` VARCHAR(2) NOT NULL,
+`zipMain` VARCHAR(5) NOT NULL,
+`zipPlus4` VARCHAR(4) NULL,
+PRIMARY KEY(`id`),
+UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `group28`.`fuelQuote` (
+`id` INT NOT NULL AUTO_INCREMENT,
+`gallons` INT(11) NULL,
+`address` VARCHAR(100) NULL,
+`delivery` DATE NULL,
+`price` FLOAT(11) NULL,
+`totaldue` FLOAT(21) NULL,
+`username` VARCHAR(45) NULL,
+PRIMARY KEY (`id`))
+ENGINE = InnoDB;
