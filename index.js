@@ -65,8 +65,8 @@ app.get('/',function(req, res) {
   res.sendFile(__dirname + '/client/landingpage.html');
 });
 
-// // GET method route for the events page.
-// It serves events.html present in client folder
+// // GET method route for getClientInfoDatabase page.
+// Grab user's information to use for fuelquotehistory
 app.get('/getClientInfoDatabase',function(req, res) {
   con.query('SELECT * FROM clientInformation', function(err,result,fields) {
     if (err) throw err;
@@ -82,7 +82,7 @@ app.get('/getClientInfoDatabase',function(req, res) {
 // GET method route for the addEvent page.
 // It serves addEvent.html present in client folder
 app.get('/completeprofile',function(req, res) {
-	
+
   if (req.session.loggedin) {
     res.sendFile(__dirname + '/client/completeprofile.html');
   } else {
@@ -90,7 +90,7 @@ app.get('/completeprofile',function(req, res) {
   }
 });
 
-//GET method for stock page
+//GET method for fuelquoteform page
 app.get('/fuelquoteform', function (req, res) {
   if (req.session.loggedin) {
     res.sendFile(__dirname + '/client/fuelquoteform.html');
@@ -99,7 +99,7 @@ app.get('/fuelquoteform', function (req, res) {
   }
 });
 
-//GET method for admin page
+//GET method for fuelquotehistory page
 app.get('/fuelquotehistory', function (req, res) {
   if (req.session.loggedin) {
     res.sendFile(__dirname + '/client/fuelquotehistory.html');
@@ -107,6 +107,16 @@ app.get('/fuelquotehistory', function (req, res) {
     res.redirect('/login');
   }
 });
+
+//GET method for updateprofile page
+app.get('/updateprofile', function (req, res) {
+  if (req.session.loggedin) {
+    res.sendFile(__dirname + '/client/updateprofile.html');
+  } else {
+    res.redirect('/login');
+  }
+});
+
 
 // GET method route for the login page.
 // It serves login.html present in client folder
