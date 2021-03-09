@@ -1,0 +1,4 @@
+1. https://github.com/megant20/4353project
+2. For the backend, we decided to switch from using C++ to JavaScript and NodeJS because it is easier to use for web applications. We backed up the validations for the forms we already have in HTML and CSS in JavaScript, and we also validated the data against what is stored for the user in the database with NodeJS.
+3. Provide code coverage report. (3 points)
+4. Alex wrote up the framework for the backend,
