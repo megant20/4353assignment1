@@ -1,18 +1,27 @@
-CREATE DATABASE group28;
-USE group28;
+CREATE TABLE IF NOT EXISTS `group28`.`clientInformation` (
+    ->   `id` INT NOT NULL AUTO_INCREMENT,
+    ->   `username` VARCHAR(45) NULL,
+    ->   `address` VARCHAR(45) NULL,
+    ->   `state` VARCHAR(2) NULL,
+    ->   PRIMARY KEY (`id`),
+    ->   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE)
+    -> ENGINE = InnoDB;
 
-CREATE TABLE userCredentials(
-    -> username VARCHAR(100),
-    -> password VARCHAR(15000));
+CREATE TABLE IF NOT EXISTS `group28`.`userCredentials` (
+    ->   `id` INT NOT NULL AUTO_INCREMENT,
+    ->   `username` VARCHAR(45) NULL,
+    ->   `password` VARCHAR(45) NULL,
+    ->   PRIMARY KEY (`id`),
+    ->   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE)
+    -> ENGINE = InnoDB;
 
-CREATE TABLE clientInformation(
-    -> username VARCHAR(100),
-    -> address VARCHAR(255),
-    -> state VARCHAR(2));
-
-CREATE TABLE fuelQuote(
-    -> gallons INT(11),
-    -> address VARCHAR(255),
-    -> delivery DATE,
-    -> price FLOAT(11),
-    -> totaldue FLOAT(21));
+CREATE TABLE IF NOT EXISTS `group28`.`fuelQuote` (
+    ->   `id` INT NOT NULL AUTO_INCREMENT,
+    ->   `gallons` INT(11) NULL,
+    ->   `address` VARCHAR(45) NULL,
+    ->   `delivery` DATE NULL,
+    ->   `price` FLOAT(11) NULL,
+    ->   `totaldue` FLOAT(21) NULL,
+    ->   `username` VARCHAR(45) NULL,
+    ->   PRIMARY KEY (`id`))
+    -> ENGINE = InnoDB;
