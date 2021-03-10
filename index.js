@@ -220,12 +220,20 @@ app.post('/sendLoginDetails', function(req, res) {
 			} else {
 				res.send('Incorrect Username and/or Password!');
 			}
-			res.end();
 		});
 	} else {
 		res.send('Please enter Username and Password!');
 		res.end();
 	}
+	con.query('SELECT * FROM clientInformation WHERE username = ?', [username], function(error2, results2, fields2) {
+    if (results2.length > 0) {
+      res.redirect('/fuelquoteform')
+    }
+    else {
+      res.redirect('/completeprofile')
+    }
+    res.end();
+  });
 });
 
 // Gets the session for returning the username
