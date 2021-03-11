@@ -1,4 +1,3 @@
-CREATE DATABASE IF NOT EXISTS group28;
 USE group28;
 
 CREATE TABLE IF NOT EXISTS `group28`.`clientInformation` (
@@ -17,17 +16,18 @@ CREATE TABLE IF NOT EXISTS `group28`.`clientInformation` (
 CREATE TABLE IF NOT EXISTS `group28`.`userCredentials`(
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`username` VARCHAR(45) NOT NULL,
-	`password` VARCHAR(45) NOT NULL,
+	`password` VARCHAR(64) NOT NULL,
 	PRIMARY KEY(`id`),
 	UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE)
 	ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `group28`.`fuelQuote`(
-	`id` INT NOT NULL,
+	`id` INT NOT NULL AUTO_INCREMENT,
 	`gallonsRequested` INT(11) NULL,
 	`address` VARCHAR(316) NULL,
 	`deliveryDate` DATE NULL,
-	`unitPrice` FLOAT(11) NULL,
+	`baseUnitPrice` FLOAT(11) NULL,
+    `adjUnitPrice` FLOAT(11) NULL,
 	`totalDue` FLOAT(21) NULL,
 	`username` VARCHAR(45) NOT NULL,
 	PRIMARY KEY(`id`))
