@@ -84,7 +84,7 @@ app.get('/getClientInfoDatabase',function(req, res) {
 app.get('/completeprofile',function(req, res) {
 
   if (req.session.loggedin) {
-    res.sendFile(__dirname + '/completeprofile.html');
+    res.sendFile(__dirname + '/client/completeprofile.html');
   } else {
     res.redirect('/login');
   }
