@@ -84,7 +84,7 @@ app.get('/getClientInfoDatabase',function(req, res) {
 app.get('/completeprofile',function(req, res) {
 
   if (req.session.loggedin) {
-    res.sendFile(__dirname + '/client/completeprofile.html');
+    res.sendFile(__dirname + '/completeprofile.html');
   } else {
     res.redirect('/login');
   }
@@ -193,7 +193,7 @@ app.post('/newProfile', function(req, res) {
           // req.session.loggedin = true;
           // req.session.username = userName;
           // req.session.login = userName;
-          res.redirect('/completeprofile');
+          res.redirect('/fuelquoteform');
         });
       } else{
         console.log("ERROR!");
@@ -216,7 +216,6 @@ app.post('/sendLoginDetails', function(req, res) {
 				req.session.loggedin = true;
 				req.session.username = username;
         req.session.login = username;
-				res.redirect('/fuelquoteform');
 			} else {
 				res.send('Incorrect Username and/or Password!');
 			}
@@ -225,7 +224,7 @@ app.post('/sendLoginDetails', function(req, res) {
 		res.send('Please enter Username and Password!');
 		res.end();
 	}
-	con.query('SELECT * FROM clientInformation WHERE username = ?', [username], function(error2, results2, fields2) {
+  con.query('SELECT * FROM clientInformation WHERE username = ?', [username], function(error2, results2, fields2) {
     if (results2.length > 0) {
       res.redirect('/fuelquoteform')
     }
