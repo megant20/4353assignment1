@@ -98,11 +98,11 @@ INSERT INTO group28.fuelQuote (username, gallonsRequested, address, deliveryDate
 INSERT INTO group28.fuelQuote (username, gallonsRequested, address, deliveryDate, totalDue, adjUnitPrice, baseUnitPrice) VALUES ('wcoyote', '72000', '303 E 3rd St, Pecos, TX 79772', '2021-01-21', '192958.9', '2.68', '2.68');
 INSERT INTO group28.fuelQuote (username, gallonsRequested, address, deliveryDate, totalDue, adjUnitPrice, baseUnitPrice) VALUES ('jconnor', '21000', '624 S Grand Ave, Ste. 902, Los Angeles, CA 90017-3335', '2021-02-02', '57362.19', '2.73', '2.38');
 INSERT INTO group28.fuelQuote (username, gallonsRequested, address, deliveryDate, totalDue, adjUnitPrice, baseUnitPrice) VALUES ('mspacely', '120000', '2101 E NASA Pkwy, Houston, TX 77058-3607', '2021-01-11', '353552.84', '2.95', '2.95');
-INSERT INTO group28.userCredentials (username, password) VALUE ('jconnor', '311919A6249113C1B9713D2BF683B4899FBC3679D0F1B6EC95C158638A696A62');
-INSERT INTO group28.userCredentials (username, password) VALUE ('mspacely', '42B49C176A358F51C0DEA581EFB825EF251A98E55142561CB5EC2B8CF9778D1D');
-INSERT INTO group28.userCredentials (username, password) VALUE ('wcoyote', 'AABEE503F4E2E953D8048E6D49E721CB099FC06473A15E86A1FF1F37119FF9F7');
-INSERT INTO group28.userCredentials (username, password) VALUE ('tstark', 'C5DD44B521563237EF71FF04A659A0D58A2302D57E9C5BC9E1AEC150F20CDD0C');
-INSERT INTO group28.userCredentials (username, password) VALUE ('jmcclane', '3DA8BA7FCCCE13DF7BBD3A1821C954A910A57B53739D8F3375088DC18D7D5A35');
+INSERT INTO group28.userCredentials (username, password) VALUE ('jconnor', 'MRkZpiSRE8G5cT0r9oO0iZ+8NnnQ8bbslcFYY4ppamI=');
+INSERT INTO group28.userCredentials (username, password) VALUE ('mspacely', 'QrScF2o1j1HA3qWB77gl7yUamOVRQlYctewrjPl3jR0=');
+INSERT INTO group28.userCredentials (username, password) VALUE ('wcoyote', 'qr7lA/Ti6VPYBI5tSechywmfwGRzoV6Gof8fNxGf+fc=');
+INSERT INTO group28.userCredentials (username, password) VALUE ('tstark', 'xd1EtSFWMjfvcf8Eplmg1YojAtV+nFvJ4a7BUPIM3Qw=');
+INSERT INTO group28.userCredentials (username, password) VALUE ('jmcclane', 'Pai6f8zOE997vToYIclUqRCle1NznY8zdQiNwY19WjU=');
 INSERT INTO group28.clientInformation (username, addressLine1, addressLine2, city, state, zipMain, zipPlus4) VALUES ('jconnor', '624 S Grand Ave', 'Ste. 902', 'Los Angeles', 'CA', '90017', '3335');
 INSERT INTO group28.clientInformation (username, addressLine1, addressLine2, city, state, zipMain, zipPlus4) VALUES ('mspacely', '2101 E NASA Pkwy', NULL, 'Houston', 'TX', '77058', '3607');
 INSERT INTO group28.clientInformation (username, addressLine1, addressLine2, city, state, zipMain, zipPlus4) VALUES ('wcoyote', '303 E 3rd St', NULL, 'Pecos', 'TX', '79772', NULL);
