@@ -15,23 +15,23 @@
 		<h1>Update Profile</h1>
 		<!--Basically, the table is a child of the <form>. It's a two column table; first column is the label; second column is the input field.
 			The rowHeader and rowContents classes are defined in the stylesheet. Then your submit button(s) go at the end of (but not within) the table.-->
-		<form action="fuelquoteform.html" method="post" id="form-update-profile" onsubmit="submitClick()">
+		<form action="/editProfile" method="post" id="form-update-profile">
 			<table>
 				<tr>
 					<td class="rowHeader">Full Name:</td>
-					<td class="rowContents"><input type="text" id="full-name" name="full-name" maxlength="50" required></td>
+					<td class="rowContents"><input type="text" id="full-name" name="fullname2" maxlength="50" required></td>
 				</tr>
 				<tr>
 					<td class="rowHeader">Address Line 1:</td>
-					<td class="rowContents"><input type="text" id="address-line-1" name="address-line-1" maxlength="100" required></td>
+					<td class="rowContents"><input type="text" id="address-line-1" name="addressline12" maxlength="100" required></td>
 				</tr>
 				<tr>
 					<td class="rowHeader">Address Line 2:</td>
-					<td class="rowContents"><input type="text" id="address-line-2" name="address-line-2" maxlength="100"></td>
+					<td class="rowContents"><input type="text" id="address-line-2" name="addressline22" maxlength="100"></td>
 				</tr>
 				<tr>
 					<td class="rowHeader">City:</td>
-					<td class="rowContents"><input type="text" id="city" name="city" maxlength="100" required></td>
+					<td class="rowContents"><input type="text" id="city" name="city2" maxlength="100" required></td>
 				</tr>
 				<tr>
 					<td class="rowHeader">State:</td>
@@ -97,14 +97,14 @@
 				<tr>
 					<td class="rowHeader">Zip Code:</td>
 					<td class="rowContents">
-						<input type="number" id="_zip-main" name="zip-main" maxlength="5" required>
+						<input type="number" id="_zip-main" name="zipmain2" min = "1" max = "100000" required>
 						<label>-</label>
-						<input type="number" id="_zip-plus-four" name="zip-plus-four" maxlength="4">
+						<input type="number" id="_zip-plus-four" name="zipplusfour2" min = "1" max="10000">
 					</td>
 				</tr>
 			</table>
 			<button type="submit" name="update">Update</button>
-			<button type="reset" name="cancel">Cancel</button>
 		</form>
 	</body>
 </html>
+
