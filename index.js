@@ -161,16 +161,17 @@ app.post('/addUser', function(req, res) {
     }
 });
 
-app.post('/newProfile', function(req, res) {
-    var fullName = req.body.fullname;
-    var addy1 = req.body.addressline1;
-    var addy2 = req.body.addressline2;
-    var ncity = req.body.city;
-    var state = req.body.state;
-    var zipmain = req.body.zipmain;
-    var zipfour = req.body.zipplusfour;
+app.post('/editProfile', function(req, res) {
+    var fullName = req.body.fullname2;
+    var addy1 = req.body.addressline12;
+    var addy2 = req.body.addressline22;
+    var ncity = req.body.city2;
+    var state = req.body.state2;
+    var zipmain = req.body.zipmain2;
+    var zipfour = req.body.zipplusfour2;
 
     var username = 	req.session.username;
+    console.log(username)
     if (username) {
       con.query('SELECT * FROM userCredentials WHERE username = ?', [username], function(error, results, fields) {
         //User Doesn't Exist
@@ -183,8 +184,15 @@ app.post('/newProfile', function(req, res) {
             city: ncity,
             state: state,
             zipMain: zipmain,
-            zipPlus4: zipfour
+            zipPlus4: zipfour,
+            fullName: fullName
           };
+        con.query('DELETE FROM clientInformation WHERE username = ?', username, function(er, ress) {
+          if (er) {
+            throw er;
+          }
+          console.log("Value deleted")
+        });
         con.query('INSERT clientInformation SET ?', rowToBeInserted, function(err, result) {
           if(err) {
           throw err;
@@ -197,6 +205,51 @@ app.post('/newProfile', function(req, res) {
         });
       } else{
         console.log("ERROR!");
+      }
+		});
+    } else {
+      console.log("Invalid UserData: one or more entries are missing!");
+      res.send("Invalid UserData: one or more entries are missing!")
+    }
+});
+
+app.post('/newProfile', function(req, res) {
+    var fullName = req.body.fullname;
+    var addy1 = req.body.addressline1;
+    var addy2 = req.body.addressline2;
+    var ncity = req.body.city;
+    var state = req.body.state;
+    var zipmain = req.body.zipmain;
+    var zipfour = req.body.zipplusfour;
+
+    var username = req.session.username;
+    if (username) {
+      con.query('SELECT * FROM userCredentials WHERE username = ?', [username], function(error, results, fields) {
+        //User Doesn't Exist
+        if (results.length){
+          console.log("Saving Info");
+          var rowToBeInserted = {
+            username: username,
+            addressLine1: addy1,
+            addressLine2: addy2,
+            city: ncity,
+            state: state,
+            zipMain: zipmain,
+            zipPlus4: zipfour,
+            fullName: fullName
+          };
+        con.query('INSERT clientInformation SET ?', rowToBeInserted, function(err, result) {
+          if(err) {
+          throw err;
+          }
+          console.log("Value inserted");
+          // req.session.loggedin = true;
+          // req.session.username = userName;
+          // req.session.login = userName;
+          res.redirect('/fuelquoteform');
+        });
+      } else{
+        console.log("ERROR");
       }
 		});
     } else {
