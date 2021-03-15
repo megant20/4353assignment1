@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/client/styles.css">
+		<title>Update Profile</title>
+		<!--This <div> is the ribbon. Insert it into the <head> as done here. The ribbon class is defined in the stylesheet-->
+		<div class="ribbon">
+			<a href="/fuelquoteform"><span>Get a Quote</span></a>
+			<a href="/fuelquotehistory"><span>Fuel Quote History</span></a>
+			<a href="/updateprofile"><span>Profile</span></a>
+			<a href="/logout"><span>Log Out</span></a>
+		</div>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td class="rowHeader"><label>Requested Amount:</label></td>
+				<td class="rowContents"><label id="amount"></label></td>
+			</tr>
+			<tr>
+				<td class="rowHeader"><label>Delivery Address:</label></td>
+				<td class="rowContents"><label id="address"></label></td>
+			</tr>
+			<tr>
+				<td class="rowHeader"><label>Delivery Date:</label></td>
+				<td class="rowContents"><label id="delivery-date"></label></td>
+			</tr>
+			<tr>
+				<td class="rowHeader"><label>Unit Price:</label></td>
+				<td class="rowContents"><label id="unit-price"></label></td>
+			</tr>
+			<tr>
+				<td class="rowHeader"><label>Total Due:</label></td>
+				<td class="rowContents"><label id="total-due"></label></td>
+			</tr>
+		</table>
+	</body>
+	<script>
+		var xhr = new XMLHttpRequest();
+		var url = '/generateQuote';
+		
+		console.log('fetching quote');
+		
+		xhr.addEventListener('load', gotAddress);
+		
+		console.log('added load listener');
+		
+		xhr.open('GET', url, true);
+		xhr.send('');
+		
+		function gotAddress(evt)
+		{
+			console.log("got quote");
+			console.log(xhr.response);
+			
+			var obj = JSON.parse(xhr.response);
+			
+			document.getElementById("amount").innerHTML = obj.gallonsRequested;
+			document.getElementById("address").innerHTML = obj.address;
+			document.getElementById("delivery-date").innerHTML = obj.deliveryDate;
+			document.getElementById("unit-price").innerHTML = '$ ' + obj.adjUnitPrice;
+			document.getElementById("total-due").innerHTML = '$ ' + obj.totalDue;
+		}
+	</script>
+</html>

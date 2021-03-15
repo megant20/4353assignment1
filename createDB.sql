@@ -3,6 +3,7 @@ USE group28;
 CREATE TABLE IF NOT EXISTS `group28`.`clientInformation` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`username` VARCHAR(45) NOT NULL,
+	`fullname` VARCHAR(50) NOT NULL,
 	`addressLine1` VARCHAR(100) NOT NULL,
 	`addressLine2` VARCHAR(100) NULL,
 	`city` VARCHAR(100) NOT NULL,

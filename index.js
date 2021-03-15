@@ -65,18 +65,53 @@ app.get('/',function(req, res) {
   res.sendFile(__dirname + '/client/landingpage.html');
 });
 
+app.get('/quoteOutput', function(req, res)
+{
+	console.log("loaded quote page");
+	res.sendFile(__dirname + '/client/quoteOutput.html');
+});
+
 // // GET method route for getClientInfoDatabase page.
 // Grab user's information to use for fuelquotehistory
-app.get('/getClientInfoDatabase',function(req, res) {
-  con.query('SELECT * FROM clientInformation', function(err,result,fields) {
+app.get('/getClientAddress',function(req, res) {
+  con.query('SELECT * FROM clientInformation WHERE username = ?', req.session.username, function(err,result,fields) {
     if (err) throw err;
     if (result.length == 0) {
       console.log("No entries in accounts table");
     } else { // Send Accounts table
-      console.log(result);
-      res.send(result);
+      var fullAddress = result[0].addressLine1;
+	  
+	  if (result[0].addressLine2 != '')
+	  {
+		  fullAddress += (', ' + result[0].addressLine2);
+	  }
+	  
+	  fullAddress += (', ' + result[0].city + ', ' + result[0].state + ' ' + result[0].zipMain);
+	  
+	  if (result[0].zipPlus4 != '')
+	  {
+		  fullAddress += ('-' + result[0].zipPlus4);
+	  }
+	  
+	  res.send(fullAddress);
     }
   });
+});
+
+app.get('/getClientInfo', function(req, res)
+{
+	con.query('SELECT * FROM clientInformation WHERE username = ?', req.session.username, function(error, result, fields)
+	{
+		if (error) throw error;
+		if (result.length == 0)
+		{
+			console.log('User not found');
+		}
+		else
+		{
+			res.send(result[0]);
+		}
+	});
 });
 
 // GET method route for the addEvent page.
@@ -126,6 +161,38 @@ app.get('/login',function(req, res) {
   } else {
     res.redirect('/fuelquoteform');
   }
+});
+
+// POST method to save request details
+app.post('/saveRequest', function(req, res)
+{
+	var user = req.session.username;
+	var reqAmount = req.body.gallons;
+	var addr = req.body.address;
+	var date = new Date(req.body.d_date);
+	
+	if (user && reqAmount && addr && date)
+	{
+		var query = "INSERT INTO group28.fuelQuote (username, gallonsRequested, address, deliveryDate) VALUES (";// + user +"', '" + reqAmount + "', '" + addr + "', '" + date + "');";
+		
+		//date from form is treated as UTC. JS converts that to local time. Need to convert back to get proper date
+		var x = new Date();
+		var offset = x.getTimezoneOffset() / 60;
+		
+		addHours(date, offset);
+		
+		con.query(query + "?, ?, ?, ?);", [user, reqAmount, addr, date], function(error, result)
+		{
+			if (error) { throw error; }
+			
+			console.log('saved request');
+			res.redirect('/quoteOutput');
+		});
+	}
+	else
+	{
+		console.log("save failed");
+	}	
 });
 
 app.post('/addUser', function(req, res) {
@@ -312,6 +379,176 @@ app.get('/logout', function(req, res) {
 // middle ware to serve static files
 app.use('/client', express.static(__dirname + '/client'));
 
+
+
+
+// GET Method for generating fuel quotes
+app.get('/generateQuote', function(req, res) {
+	//console.log("got here");
+	var userName = req.session.username;
+	var requestedAmount = 0.0;
+	var inState = false;
+	var queryString = '';
+	var msg = '';
+	var multiplier = 1.0;
+	var regTotal = 0.0;
+	var basePriceOut = 2.5;
+	var adjPriceOut = 0.0;
+	var totalPriceOut = 0.0;
+	var addr = '';
+	var delivDate = new Date();
+	var name = '';
+	
+	var ourState = 'TX';
+	
+	if (userName)
+	{
+		// set inState
+		queryString = 'SELECT * FROM clientInformation WHERE username = ?';
+		con.query(queryString, [userName], function(error, results, fields)
+		{
+			if (results.length > 0)
+			{
+				inState = (results[0].state == ourState);
+				if (!inState)
+				{
+					multiplier = 1.15;
+				}
+				
+				console.log('multiplier set');
+			}
+			else
+			{
+				msg = 'User not found'; // shouldn't actually happen
+				
+				console.log(msg);
+				res.send(msg);
+			}
+		});
+		
+		// fetch query details
+		queryString = 'SELECT * FROM group28.fuelQuote WHERE username = ? ORDER BY id DESC;';
+		con.query(queryString, [userName], function (error, result, fields)
+		{
+			if (result.length > 0)
+			{
+				console.log(result[0]);
+				console.log('fetched quote details');
+				
+				requestedAmount = result[0].gallonsRequested;
+				addr = result[0].address;
+				delivDate = result[0].deliveryDate;
+			}
+			else
+			{
+				res.send('request not found');
+				return;
+			}
+		});
+		
+		queryString = 'SELECT gallonsRequested, totalDue FROM fuelQuote';
+		con.query(queryString, function(error, results, fields)
+		{
+			if (results.length > 0)
+			{
+				var a = linearRegression(results, false);
+				var b = linearRegression(results, true);
+				
+				console.log('performed regression');
+				
+				regTotal = b * requestedAmount + a;
+				
+				if (regTotal == -1.0)	//	no data found
+				{
+					adjPriceOut = multiplier * basePriceOut;
+					totalPriceOut = adjPriceOut * requestedAmount;
+				}
+				else
+				{
+					basePriceOut = regTotal / requestedAmount;
+					adjPriceOut = basePriceOut * multiplier;
+					totalPriceOut = adjPriceOut * requestedAmount;
+				}
+			}
+			else
+			{
+				adjPriceOut = multiplier * basePriceOut;
+				totalPriceOut = adjPriceOut * gallonsRequested;
+			}
+			
+			var dateStr = delivDate.getFullYear() + '-' + pad(delivDate.getMonth() + 1, 2, '0') + '-' + pad(delivDate.getDate(), 2, '0');
+			var outRes = {
+				gallonsRequested: requestedAmount,
+				address: addr,
+				deliveryDate: dateStr,
+				adjUnitPrice:  adjPriceOut.toFixed(2),
+				totalDue: totalPriceOut.toFixed(2)
+			};
+			
+			res.send(outRes);
+		});
+	}
+	else
+	{
+		msg = 'You must be logged in';
+		
+		console.log(msg);
+		res.send(msg);
+	}
+});
+
+function linearRegression(data, returnSlope)
+{
+	var i;
+	var sumY = 0.0;
+	var sumXSq = 0.0;
+	var sumX = 0.0;
+	var sumXY = 0.0;
+	var n = data.length;
+	
+	if (n > 0)
+	{
+		for (i = 0; i < n; i++)
+		{
+			sumY += data[i].totalDue;
+			sumXSq += Math.pow(data[i].gallonsRequested, 2.0);
+			sumX += data[i].gallonsRequested;
+			sumXY += data[i].gallonsRequested * data[i].totalDue;
+		}
+		
+		if (returnSlope)
+		{
+			return (n * sumXY - sumX * sumY) / (n * sumXSq - Math.pow(sumX, 2.0));
+		}
+		else
+		{
+			return (sumY * sumXSq - sumX * sumXY) / (n * sumXSq - Math.pow(sumX, 2.0));
+		}
+	}
+	else
+	{
+		return -1.0;
+	}
+}
+
+function addHours(baseDate, hours)
+{
+	baseDate.setTime(baseDate.getTime() + (hours * 60 * 60 * 1000));
+	
+	return baseDate;
+}
+
+function pad(num, spaces, padChar)
+{
+	num = num.toString();
+	
+	while(num.length < spaces)
+	{
+		num = padChar + num;
+	}
+	
+	return num;
+}
 
 // function to return the 404 message and error to client
 app.get('*', function(req, res) {

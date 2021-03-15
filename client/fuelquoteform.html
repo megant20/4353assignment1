@@ -11,7 +11,7 @@
 	</head>
 	<body>
 		<h1>Fuel Quote Form</h1>
-    <form action = "#" method = "post">
+    <form action = "/saveRequest" method = "post">
 		<!-- Gallons Requested (numeric, required) -->
 		<table>
 			<tr>
@@ -30,45 +30,26 @@
 				<td class="rowHeader"><label for = "d_date">Delivery Date:</label></td>
 				<td class="rowContents"><input type = "date" id="d_date" name="d_date"></td>
 			</tr>
-
-			<!-- Suggested Price / gallon (numeric non-editable, price will be calculated by Pricing Module - we are not building pricing module yet) -->
-			<tr>
-				<td class="rowHeader"><label for = "s_price">Suggested Price per Gallon:</label></td>
-				<td class="rowContents"><input type = "text" id="s_price" name="s_price" readonly></td>
-			</tr>
-
-			<!-- Total Amount Due (numeric non-editable, calculated (gallons * price)) -->
-			<tr>
-				<td class="rowHeader"><label for = "total_due">Total Amount Due:</label></td>
-				<td class="rowContents"><input type = "text" id="total_due" name="total_due" readonly></td>
-			</tr>
 		</table>
-      <button type = "submit" onclick="storeForm()" name = "fuel-form-submit">Submit</button>
+      <button type = "submit" name = "fuel-form-submit">Submit</button>
 
     </form>
 	</body>
 	<script type = "text/javascript">
-	var xmlhttp = new XMLHttpRequest();
-	var url = "getClientInfoDatabase";
-
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			var eventArr = JSON.parse(xmlhttp.responseText);
-			updateEvents(eventArr);
+		var xhr = new XMLHttpRequest();
+		var url = '/getClientAddress';
+		
+		xhr.addEventListener('load', gotAddress);
+		
+		xhr.open('GET', url, true);
+		xhr.send('');
+		
+		function gotAddress(evt)
+		{
+			console.log("got address");
+			console.log(xhr.response);
+			
+			document.getElementById("address").value = xhr.response;
 		}
-	}
-
-	xmlhttp.open("GET", url, true);
-	xmlhttp.send();
-
-	// Save information to database
-	function storeForm(){
-		var gallons = document.getElementById("gallons").value;
-		var deliveryAddress = document.getElementById("address").value;
-		var deliveryDate = document.getElementById("d_date").value;
-		var suggestedPrice = document.getElementById("s_price").value;
-		var totalDue = document.getElementById("total_due").value;
-	}
-
 	</script>
 </html>
