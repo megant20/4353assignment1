@@ -59,7 +59,7 @@ var cfg = {
 var con = mysql.createPool(cfg);
 
 // server listens on port 9001 for incoming connections
-app.listen(process.env.PORT || 9001, () => console.log('Listening on port 9001!'));
+module.exports = app.listen(process.env.PORT || 9001, () => console.log('Listening on port 9001!'));
 
 app.get('/',function(req, res) {
   res.sendFile(__dirname + '/client/landingpage.html');
@@ -80,19 +80,19 @@ app.get('/getClientAddress',function(req, res) {
       console.log("No entries in accounts table");
     } else { // Send Accounts table
       var fullAddress = result[0].addressLine1;
-	  
+
 	  if (result[0].addressLine2 != '')
 	  {
 		  fullAddress += (', ' + result[0].addressLine2);
 	  }
-	  
+
 	  fullAddress += (', ' + result[0].city + ', ' + result[0].state + ' ' + result[0].zipMain);
-	  
+
 	  if (result[0].zipPlus4 != '')
 	  {
 		  fullAddress += ('-' + result[0].zipPlus4);
 	  }
-	  
+
 	  res.send(fullAddress);
     }
   });
@@ -170,21 +170,21 @@ app.post('/saveRequest', function(req, res)
 	var reqAmount = req.body.gallons;
 	var addr = req.body.address;
 	var date = new Date(req.body.d_date);
-	
+
 	if (user && reqAmount && addr && date)
 	{
 		var query = "INSERT INTO group28.fuelQuote (username, gallonsRequested, address, deliveryDate) VALUES (";// + user +"', '" + reqAmount + "', '" + addr + "', '" + date + "');";
-		
+
 		//date from form is treated as UTC. JS converts that to local time. Need to convert back to get proper date
 		var x = new Date();
 		var offset = x.getTimezoneOffset() / 60;
-		
+
 		addHours(date, offset);
-		
+
 		con.query(query + "?, ?, ?, ?);", [user, reqAmount, addr, date], function(error, result)
 		{
 			if (error) { throw error; }
-			
+
 			console.log('saved request');
 			res.redirect('/quoteOutput');
 		});
@@ -192,7 +192,7 @@ app.post('/saveRequest', function(req, res)
 	else
 	{
 		console.log("save failed");
-	}	
+	}
 });
 
 app.post('/addUser', function(req, res) {
@@ -212,6 +212,7 @@ app.post('/addUser', function(req, res) {
           throw err;
           }
           console.log("Value inserted");
+          res.status(201);
           req.session.loggedin = true;
           req.session.username = userName;
           req.session.login = userName;
@@ -220,11 +221,13 @@ app.post('/addUser', function(req, res) {
       } else{
         console.log("user EXISTS!");
         res.send('user already exists!');
+        res.status(400);
       }
 		});
     } else {
       console.log("Invalid UserData: one or more entries are missing!");
       res.send("Invalid UserData: one or more entries are missing!")
+      res.status(400);
     }
 });
 
@@ -398,9 +401,9 @@ app.get('/generateQuote', function(req, res) {
 	var addr = '';
 	var delivDate = new Date();
 	var name = '';
-	
+
 	var ourState = 'TX';
-	
+
 	if (userName)
 	{
 		// set inState
@@ -414,18 +417,18 @@ app.get('/generateQuote', function(req, res) {
 				{
 					multiplier = 1.15;
 				}
-				
+
 				console.log('multiplier set');
 			}
 			else
 			{
 				msg = 'User not found'; // shouldn't actually happen
-				
+
 				console.log(msg);
 				res.send(msg);
 			}
 		});
-		
+
 		// fetch query details
 		queryString = 'SELECT * FROM group28.fuelQuote WHERE username = ? ORDER BY id DESC;';
 		con.query(queryString, [userName], function (error, result, fields)
@@ -434,7 +437,7 @@ app.get('/generateQuote', function(req, res) {
 			{
 				console.log(result[0]);
 				console.log('fetched quote details');
-				
+
 				requestedAmount = result[0].gallonsRequested;
 				addr = result[0].address;
 				delivDate = result[0].deliveryDate;
@@ -445,7 +448,7 @@ app.get('/generateQuote', function(req, res) {
 				return;
 			}
 		});
-		
+
 		queryString = 'SELECT gallonsRequested, totalDue FROM fuelQuote';
 		con.query(queryString, function(error, results, fields)
 		{
@@ -453,11 +456,11 @@ app.get('/generateQuote', function(req, res) {
 			{
 				var a = linearRegression(results, false);
 				var b = linearRegression(results, true);
-				
+
 				console.log('performed regression');
-				
+
 				regTotal = b * requestedAmount + a;
-				
+
 				if (regTotal == -1.0)	//	no data found
 				{
 					adjPriceOut = multiplier * basePriceOut;
@@ -475,7 +478,7 @@ app.get('/generateQuote', function(req, res) {
 				adjPriceOut = multiplier * basePriceOut;
 				totalPriceOut = adjPriceOut * gallonsRequested;
 			}
-			
+
 			var dateStr = delivDate.getFullYear() + '-' + pad(delivDate.getMonth() + 1, 2, '0') + '-' + pad(delivDate.getDate(), 2, '0');
 			var outRes = {
 				gallonsRequested: requestedAmount,
@@ -484,14 +487,14 @@ app.get('/generateQuote', function(req, res) {
 				adjUnitPrice:  adjPriceOut.toFixed(2),
 				totalDue: totalPriceOut.toFixed(2)
 			};
-			
+
 			res.send(outRes);
 		});
 	}
 	else
 	{
 		msg = 'You must be logged in';
-		
+
 		console.log(msg);
 		res.send(msg);
 	}
@@ -505,7 +508,7 @@ function linearRegression(data, returnSlope)
 	var sumX = 0.0;
 	var sumXY = 0.0;
 	var n = data.length;
-	
+
 	if (n > 0)
 	{
 		for (i = 0; i < n; i++)
@@ -515,7 +518,7 @@ function linearRegression(data, returnSlope)
 			sumX += data[i].gallonsRequested;
 			sumXY += data[i].gallonsRequested * data[i].totalDue;
 		}
-		
+
 		if (returnSlope)
 		{
 			return (n * sumXY - sumX * sumY) / (n * sumXSq - Math.pow(sumX, 2.0));
@@ -534,19 +537,19 @@ function linearRegression(data, returnSlope)
 function addHours(baseDate, hours)
 {
 	baseDate.setTime(baseDate.getTime() + (hours * 60 * 60 * 1000));
-	
+
 	return baseDate;
 }
 
 function pad(num, spaces, padChar)
 {
 	num = num.toString();
-	
+
 	while(num.length < spaces)
 	{
 		num = padChar + num;
 	}
-	
+
 	return num;
 }
 

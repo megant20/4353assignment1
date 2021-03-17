@@ -4,7 +4,7 @@
   "description": "group28",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -17,9 +17,17 @@
   },
   "homepage": "https://github.com/megant20/4353project#readme",
   "dependencies": {
+    "chai": "^4.3.4",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "mocha": "^8.3.2",
+    "mock-req": "^0.2.0",
+    "mock-res": "^0.5.0",
     "mysql": "^2.18.1",
+    "sinon": "^9.2.4",
     "xml2js": "^0.4.23"
+  },
+  "devDependencies": {
+    "chai-http": "^4.3.0"
   }
 }
