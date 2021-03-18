@@ -4,7 +4,7 @@
   "description": "group28",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "nyc mocha"
   },
   "repository": {
     "type": "git",
