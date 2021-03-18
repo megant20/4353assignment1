@@ -1,6 +1,9 @@
 1. https://github.com/megant20/4353project
 2. For the backend, we decided to switch from using C++ to JavaScript and NodeJS because it is easier to use for web applications. We backed up the validations for the forms we already have in HTML and CSS in JavaScript, and we also validated the data against what is stored for the user in the database with NodeJS.
+We used mocha with Istanbul for unit testing and code coverage but believe the low percent we got was due to Istanbul being unable to see some of the 
+includes in the index.js or some of the other files.
 3. Provide code coverage report. (3 points)
-4. Alex wrote up the framework for the backend,
+https://github.com/megant20/4353project/blob/main/Screen%20Shot%202021-03-17%20at%207.14.37%20PM.png
+4. Alex wrote up the framework for the backend and did some of the unit tests for the GET methods,
    Megan added some extra backend validation to the landing page, added backend to update profile, and wrote this project document,
-   David wrote the fuel quote modules
+   David wrote the fuel quote modules and helped to test the application
