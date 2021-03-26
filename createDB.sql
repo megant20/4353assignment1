@@ -1,3 +1,4 @@
+CREATE DATABASE `group28`;
 USE group28;
 
 CREATE TABLE IF NOT EXISTS `group28`.`clientInformation` (
