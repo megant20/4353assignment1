@@ -61,7 +61,7 @@ var con = mysql.createPool(cfg);
 // server listens on port 9001 for incoming connections
 module.exports = app.listen(process.env.PORT || 9001, () => console.log('Listening on port 9001!'));
 
-app.get('/',function(req, res) {
+app.get('/landingpage',function(req, res) {
   res.sendFile(__dirname + '/client/landingpage.html');
 });
 
@@ -492,6 +492,7 @@ app.get('/generateQuote', function(req, res) {
 	var addr = '';
 	var delivDate = new Date();
 	var name = '';
+	var reqId = -1;
 
 	var ourState = 'TX';
 
@@ -532,6 +533,7 @@ app.get('/generateQuote', function(req, res) {
 				requestedAmount = result[0].gallonsRequested;
 				addr = result[0].address;
 				delivDate = result[0].deliveryDate;
+				reqId = result[0].id;
 			}
 			else
 			{
@@ -578,6 +580,13 @@ app.get('/generateQuote', function(req, res) {
 				adjUnitPrice:  adjPriceOut.toFixed(2),
 				totalDue: totalPriceOut.toFixed(2)
 			};
+			
+			con.query('UPDATE fuelQuote SET baseUnitPrice = ?, adjUnitPrice = ?, totalDue = ? WHERE id = ?', [basePriceOut, adjPriceOut, totalPriceOut, reqId], function(error, results)
+			{
+				if (error) {
+					throw error;
+				}
+			});
 
 			res.send(outRes);
 		});
@@ -604,10 +613,16 @@ function linearRegression(data, returnSlope)
 	{
 		for (i = 0; i < n; i++)
 		{
-			sumY += data[i].totalDue;
-			sumXSq += Math.pow(data[i].gallonsRequested, 2.0);
-			sumX += data[i].gallonsRequested;
-			sumXY += data[i].gallonsRequested * data[i].totalDue;
+			if (data[i] != null)
+			{
+				if (data[i].totalDue != null && data[i].gallonsRequested != null)
+				{
+					sumY += data[i].totalDue;
+					sumXSq += Math.pow(data[i].gallonsRequested, 2.0);
+					sumX += data[i].gallonsRequested;
+					sumXY += data[i].gallonsRequested * data[i].totalDue;
+				}
+			}
 		}
 
 		if (returnSlope)

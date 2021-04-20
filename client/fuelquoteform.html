@@ -16,7 +16,7 @@
 		<table>
 			<tr>
 				<td class="rowHeader"><label for = "gallons">Gallons Requested:</label></td>
-				<td class="rowContents"><input type = "number" id="gallons" name="gallons" required></td>
+				<td class="rowContents"><input type = "number" id="gallons" name="gallons" required min="1"></td>
 			</tr>
 
 			<!-- Delivery Address (Non-editable, comes from client profile) -->
@@ -28,7 +28,7 @@
 			<!-- Delivery Date (Calender, date picker) -->
 			<tr>
 				<td class="rowHeader"><label for = "d_date">Delivery Date:</label></td>
-				<td class="rowContents"><input type = "date" id="d_date" name="d_date"></td>
+				<td class="rowContents"><input type = "date" id="d_date" name="d_date" onchange="validateDate()"></td>
 			</tr>
 		</table>
       <button type = "submit" name = "fuel-form-submit">Submit</button>
@@ -44,12 +44,54 @@
 		xhr.open('GET', url, true);
 		xhr.send('');
 		
+		defaultDate();
+		
+		function defaultDate()
+		{
+			var tomorrow = addHours(new Date(), 24);
+			var tomorrowStr = padFront(4, tomorrow.getFullYear().toString(), '0') + '-' + padFront(2, (tomorrow.getMonth() + 1).toString(), '0') + '-' + padFront(2, tomorrow.getDate().toString(), '0');
+			
+			document.getElementById('d_date').value = tomorrowStr;
+		}
+		
 		function gotAddress(evt)
 		{
 			console.log("got address");
 			console.log(xhr.response);
 			
 			document.getElementById("address").value = xhr.response;
+		}
+		
+		function addHours(baseDate, hours)
+		{
+			baseDate.setTime(baseDate.getTime() + (hours * 60 * 60 * 1000));
+
+			return baseDate;
+		}
+		
+		function validateDate() {
+			var userDate = document.getElementById("d_date").value;
+			var today = new Date();
+			
+			if (new Date(userDate).getTime() <= today.getTime()) {
+				alert("Delivery date can be no sooner than tomorrow");
+				
+				defaultDate();
+				
+				return false;
+			}
+			
+			return true;
+		}
+		
+		function padFront(length, text, padChar)
+		{
+			while (text.length < length)
+			{
+				text = padChar + text;
+			}
+			
+			return text;
 		}
 	</script>
 </html>
