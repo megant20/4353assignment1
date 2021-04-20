@@ -98,6 +98,97 @@ app.get('/getClientAddress',function(req, res) {
   });
 });
 
+app.get('/getAddy1',function(req, res) {
+  con.query('SELECT * FROM clientInformation WHERE username = ?', req.session.username, function(err,result,fields){
+    if (err) throw err;
+    if (result.length == 0) {
+      console.log("No entries in accounts table");
+    } else {
+      var addy1 = result[0].addressLine1;
+
+      res.send(addy1);
+    }
+  });
+});
+
+app.get('/getAddy2',function(req, res) {
+  con.query('SELECT * FROM clientInformation WHERE username = ?', req.session.username, function(err,result,fields){
+    if (err) throw err;
+    if (result.length == 0) {
+      console.log("No entries in accounts table");
+    } else {
+      var addy2 = result[0].addressLine2;
+
+      res.send(addy2);
+    }
+  });
+});
+
+app.get('/getCity',function(req, res) {
+  con.query('SELECT * FROM clientInformation WHERE username = ?', req.session.username, function(err,result,fields){
+    if (err) throw err;
+    if (result.length == 0) {
+      console.log("No entries in accounts table");
+    } else {
+      var city1 = result[0].city;
+
+      res.send(city1);
+    }
+  });
+});
+
+app.get('/getState',function(req, res) {
+  con.query('SELECT * FROM clientInformation WHERE username = ?', req.session.username, function(err,result,fields){
+    if (err) throw err;
+    if (result.length == 0) {
+      console.log("No entries in accounts table");
+    } else {
+      var state1 = result[0].state;
+
+      res.send(state1);
+    }
+  });
+});
+
+app.get('/getZipMain',function(req, res) {
+  con.query('SELECT * FROM clientInformation WHERE username = ?', req.session.username, function(err,result,fields){
+    if (err) throw err;
+    if (result.length == 0) {
+      console.log("No entries in accounts table");
+    } else {
+      var zip1 = result[0].zipMain;
+
+      res.send(zip1);
+    }
+  });
+});
+
+app.get('/getZipPlus',function(req, res) {
+  con.query('SELECT * FROM clientInformation WHERE username = ?', req.session.username, function(err,result,fields){
+    if (err) throw err;
+    if (result.length == 0) {
+      console.log("No entries in accounts table");
+    } else {
+      var zip2 = result[0].zipPlus4;
+
+      res.send(zip2);
+    }
+  });
+});
+
+app.get('/getFullName',function(req, res) {
+  con.query('SELECT * FROM clientInformation WHERE username = ?', req.session.username, function(err,result,fields){
+    if (err) throw err;
+    if (result.length == 0) {
+      console.log("No entries in accounts table");
+    } else {
+      var fullName = result[0].fullname;
+
+      res.send(fullName);
+    }
+  });
+});
+
 app.get('/getClientInfo', function(req, res)
 {
 	con.query('SELECT * FROM clientInformation WHERE username = ?', req.session.username, function(error, result, fields)

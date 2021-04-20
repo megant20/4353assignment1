@@ -106,5 +106,118 @@
 			<button type="submit" name="update">Update</button>
 		</form>
 	</body>
-</html>
+	<script type = "text/javascript">
+	 var xhr = new XMLHttpRequest();
+	 var fullname = '/getFullName';
 
+	 var xhr_addy1 = new XMLHttpRequest();
+	 var Addy1 = '/getAddy1';
+
+	 var xhr_addy2 = new XMLHttpRequest();
+	 var Addy2 = '/getAddy2';
+
+	 var xhr_city = new XMLHttpRequest();
+	 var City1 = '/getCity';
+
+	 var xhr_state = new XMLHttpRequest();
+	 var State1 = '/getState';
+
+	 var xhr_zipmain = new XMLHttpRequest();
+	 var Zip1 = '/getZipMain';
+
+	 var xhr_zipplus = new XMLHttpRequest();
+	 var Zip2 = '/getZipPlus';
+
+	 // Full Name
+	 xhr.addEventListener('load', gotFullName);
+	 xhr.open('GET', fullname, true);
+	 xhr.send('');
+
+	 function gotFullName(evt)
+	 {
+		 console.log("got fullname");
+		 console.log(xhr.response);
+
+		 document.getElementById("full-name").value = xhr.response;
+	 }
+
+	 // Address 1
+	 xhr_addy1.addEventListener('load', gotAddy1);
+	 xhr_addy1.open('GET', Addy1, true);
+	 xhr_addy1.send('');
+
+	 function gotAddy1(evt)
+	 {
+		 console.log("got addy1");
+		 console.log(xhr_addy1.response);
+
+		 document.getElementById("address-line-1").value = xhr_addy1.response;
+	 }
+
+	 // Address 2
+	 xhr_addy2.addEventListener('load', gotAddy2);
+	 xhr_addy2.open('GET', Addy2, true);
+	 xhr_addy2.send('');
+
+	 function gotAddy2(evt)
+	 {
+		 console.log("got addy2");
+		 console.log(xhr_addy2.response);
+
+		 document.getElementById("address-line-2").value = xhr_addy2.response;
+	 }
+
+	 // City
+	 xhr_city.addEventListener('load', gotCity1);
+	 xhr_city.open('GET', City1, true);
+	 xhr_city.send('');
+
+	 function gotCity1(evt)
+	 {
+		 console.log("got city");
+		 console.log(xhr_city.response);
+
+		 document.getElementById("city").value = xhr_city.response;
+	 }
+
+	 // State
+	 xhr_state.addEventListener('load', gotState1);
+	 xhr_state.open('GET', State1, true);
+	 xhr_state.send('');
+
+	 function gotState1(evt)
+	 {
+		 console.log("got state");
+		 console.log(xhr_state.response);
+
+		 document.getElementById("selectstate").value = xhr_state.response;
+	 }
+
+	 // Zip Main
+	 xhr_zipmain.addEventListener('load', gotZip1);
+	 xhr_zipmain.open('GET', Zip1, true);
+	 xhr_zipmain.send('');
+
+	 function gotZip1(evt)
+	 {
+		 console.log("got zipmain");
+		 console.log(xhr_zipmain.response);
+
+		 document.getElementById("_zip-main").value = xhr_zipmain.response;
+	 }
+
+	 // Zip Plus
+	 xhr_zipplus.addEventListener('load', gotZip2);
+	 xhr_zipplus.open('GET', Zip2, true);
+	 xhr_zipplus.send('');
+
+	 function gotZip2(evt)
+	 {
+		 console.log("got zipplus");
+		 console.log(xhr_zipplus.response);
+
+		 document.getElementById("_zip-plus-four").value = xhr_zipplus.response;
+	 }
+
+	</script>
+</html>
