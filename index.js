@@ -98,6 +98,19 @@ app.get('/getClientAddress',function(req, res) {
   });
 });
 
+// GET method to pull the current user's quote history
+app.get('/getquotehistory', function(req, res) {
+	con.query('SELECT * FROM fuelquote WHERE username = ? ORDER BY deliveryDate DESC', req.session.username, function (error, result, fields) {
+		if (error) throw error;
+		
+		if (result.length == 0){
+			console.log('User has no past quotes');
+		}
+		
+		res.send(result);
+	});
+});
+
 app.get('/getAddy1',function(req, res) {
   con.query('SELECT * FROM clientInformation WHERE username = ?', req.session.username, function(err,result,fields){
     if (err) throw err;

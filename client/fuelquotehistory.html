@@ -1,17 +1,18 @@
 <!DOCTYPE HTML>
 <html>
-<head><link rel = "stylesheet" typer = "text/css" href = "/client/styles.css"/>
-	<div class="ribbon">
-		<a href="/fuelquoteform"><span>Get a Quote</span></a>
-		<a href="/fuelquotehistory"><span>Fuel Quote History</span></a>
-		<a href="/updateprofile"><span>Profile</span></a>
-		<a href="/logout"><span>Log Out</span></a>
-	</div>
-</head>
+	<head>
+		<link rel = "stylesheet" typer = "text/css" href = "/client/styles.css"/>
+		<div class="ribbon">
+			<a href="/fuelquoteform"><span>Get a Quote</span></a>
+			<a href="/fuelquotehistory"><span>Fuel Quote History</span></a>
+			<a href="/updateprofile"><span>Profile</span></a>
+			<a href="/logout"><span>Log Out</span></a>
+		</div>
+	</head>
 	<body>
 		<h1>Fuel Quote History</h1>
 
-		<table style="width:100%">
+		<table style="width:100%" id='history'>
 			<tr>
 				<th>Gallons Requested</th>
 				<th>Delivery Address</th>
@@ -19,14 +20,63 @@
 				<th>Suggested Price</th>
 				<th>Total Amount Due</th>
 			</tr>
-            <tr>
-    			<td>21</td>
-    			<td>4800 Calhoun Rd, Houston, TX 77004</td>
-    			<td>02/20/2021</td>
-                <td>43.53</td>
-                <td>914.13</td>
-  			</tr>
 		</table>
 	</body>
-
+	<script type = "text/javascript">
+		var xhr = new XMLHttpRequest();
+		var url = '/getquotehistory';
+		xhr.addEventListener('load', gotHistory);
+		
+		xhr.open('GET', url, true);
+		xhr.send('');
+		
+		function gotHistory(evt)
+		{
+			appendData(JSON.parse(xhr.response));
+		}
+		
+		function newCell(value)
+		{
+			return '<td>' + value + '</td>';
+		}
+		
+		function appendData(data)
+		{
+			var n = data.length;
+			
+			if (n > 0)
+			{
+				var table = document.getElementById('history');
+				for (i = 0; i < n; i++)
+				{
+					var tr = document.createElement('tr');
+					
+					tr.innerHTML = newCell(data[i].gallonsRequested.toLocaleString()) +
+						newCell(data[i].address) +
+						newCell(formatDate(data[i].deliveryDate)) +
+						newCell('$ ' + parseFloat(data[i].adjUnitPrice).toFixed(2)) +
+						newCell('$ ' + parseFloat(data[i].totalDue).toFixed(2));
+					
+					table.append(tr);
+				}
+			}
+		}
+		
+		function formatDate(date)
+		{
+			var d = new Date(date);
+			
+			return padFront(4, d.getFullYear().toString(), '0') + '-' + padFront(2, (d.getMonth() + 1).toString(), '0') + '-' + padFront(2, d.getDate().toString(), '0');
+		}
+		
+		function padFront(length, text, padChar)
+		{
+			while (text.length < length)
+			{
+				text = padChar + text;
+			}
+			
+			return text;
+		}
+	</script>
 </html>
