@@ -547,6 +547,65 @@ app.get('/generateQuote', function(req, res) {
 				addr = result[0].address;
 				delivDate = result[0].deliveryDate;
 				reqId = result[0].id;
+				
+				var qs = 'SELECT gallonsRequested, totalDue FROM fuelQuote WHERE id <> ' + reqId.toString();
+				
+				con.query(qs, function(error, results)
+				{
+					console.log(qs);
+					console.log("got history");
+					console.log(results.length);
+					console.log(requestedAmount);
+					
+					if (results.length > 0)
+					{
+						var a = linearRegression(results, false);
+						var b = linearRegression(results, true);
+
+						console.log('performed regression');
+
+						regTotal = b * requestedAmount + a;
+
+						if (regTotal == -1.0)	//	no data found
+						{
+							adjPriceOut = multiplier * basePriceOut;
+							totalPriceOut = adjPriceOut * requestedAmount;
+						}
+						else
+						{
+							basePriceOut = regTotal / requestedAmount;
+							adjPriceOut = basePriceOut * multiplier;
+							totalPriceOut = adjPriceOut * requestedAmount;
+						}
+					}
+					else
+					{
+						console.log("history empty");
+						adjPriceOut = multiplier * basePriceOut;
+						totalPriceOut = adjPriceOut * requestedAmount;
+					}
+
+					var dateStr = delivDate.getFullYear() + '-' + pad(delivDate.getMonth() + 1, 2, '0') + '-' + pad(delivDate.getDate(), 2, '0');
+					
+					var outRes = {
+						"gallonsRequested": requestedAmount,
+						"address": addr,
+						"deliveryDate": dateStr,
+						"adjUnitPrice":  adjPriceOut.toFixed(2),
+						"totalDue": totalPriceOut.toFixed(2)
+					};
+					
+					console.log(outRes);
+					
+					con.query('UPDATE fuelQuote SET baseUnitPrice = ?, adjUnitPrice = ?, totalDue = ? WHERE id = ?', [basePriceOut, adjPriceOut, totalPriceOut, reqId], function(error, results)
+					{
+						if (error) {
+							throw error;
+						}
+					});
+
+					res.send(outRes);
+				});
 			}
 			else
 			{
@@ -554,55 +613,13 @@ app.get('/generateQuote', function(req, res) {
 				return;
 			}
 		});
-
-		queryString = 'SELECT gallonsRequested, totalDue FROM fuelQuote';
-		con.query(queryString, function(error, results, fields)
-		{
-			if (results.length > 0)
-			{
-				var a = linearRegression(results, false);
-				var b = linearRegression(results, true);
-
-				console.log('performed regression');
-
-				regTotal = b * requestedAmount + a;
-
-				if (regTotal == -1.0)	//	no data found
-				{
-					adjPriceOut = multiplier * basePriceOut;
-					totalPriceOut = adjPriceOut * requestedAmount;
-				}
-				else
-				{
-					basePriceOut = regTotal / requestedAmount;
-					adjPriceOut = basePriceOut * multiplier;
-					totalPriceOut = adjPriceOut * requestedAmount;
-				}
-			}
-			else
-			{
-				adjPriceOut = multiplier * basePriceOut;
-				totalPriceOut = adjPriceOut * gallonsRequested;
-			}
-
-			var dateStr = delivDate.getFullYear() + '-' + pad(delivDate.getMonth() + 1, 2, '0') + '-' + pad(delivDate.getDate(), 2, '0');
-			var outRes = {
-				gallonsRequested: requestedAmount,
-				address: addr,
-				deliveryDate: dateStr,
-				adjUnitPrice:  adjPriceOut.toFixed(2),
-				totalDue: totalPriceOut.toFixed(2)
-			};
-			
-			con.query('UPDATE fuelQuote SET baseUnitPrice = ?, adjUnitPrice = ?, totalDue = ? WHERE id = ?', [basePriceOut, adjPriceOut, totalPriceOut, reqId], function(error, results)
-			{
-				if (error) {
-					throw error;
-				}
-			});
-
-			res.send(outRes);
-		});
+		
+		
+		
+		
+		
+		
+		
 	}
 	else
 	{
@@ -628,7 +645,7 @@ function linearRegression(data, returnSlope)
 		{
 			if (data[i] != null)
 			{
-				if (data[i].totalDue != null && data[i].gallonsRequested != null)
+				if (data[i].totalDue != null && data[i].gallonsRequested != null && !isNaN(data[i].totalDue) && !isNaN(data[i].gallonsRequested))
 				{
 					sumY += data[i].totalDue;
 					sumXSq += Math.pow(data[i].gallonsRequested, 2.0);
