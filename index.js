@@ -65,6 +65,10 @@ app.get('/',function(req, res) {
   res.sendFile(__dirname + '/client/landingpage.html');
 });
 
+app.get('/landingpage',function(req, res) {
+  res.sendFile(__dirname + '/client/landingpage.html');
+});
+
 app.get('/quoteOutput', function(req, res)
 {
 	console.log("loaded quote page");
